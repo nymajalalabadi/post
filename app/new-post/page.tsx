@@ -1,10 +1,14 @@
+import { storePost } from '@/lib/posts';
+
 export default function NewPostPage() {
 
-    function createPost(formData: FormData) {
-    const title = formData.get('title');
-    const image = formData.get('image');
-    const content = formData.get('content');
-    console.log(title, image, content);
+    async function createPost(formData: FormData) {
+      'use server';
+      const title = formData.get('title');
+      const image = formData.get('image');
+      const content = formData.get('content');
+
+      await storePost({ imageUrl : '', title, content, userId : 1 });
     };
 
     return (
@@ -26,7 +30,7 @@ export default function NewPostPage() {
           </p>
           <p className="form-control">
             <label htmlFor="content">Content</label>
-            <textarea id="content" name="content" rows="5" />
+            <textarea id="content" name="content" rows={5} />
           </p>
           <p className="form-actions">
             <button type="reset">Reset</button>
