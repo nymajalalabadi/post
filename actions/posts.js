@@ -38,11 +38,12 @@ export async function createPost( prevState, formData) {
 
     await storePost({ imageUrl : imageUrl, title, content, userId : 1 });
 
+    revalidatePath('/feed', 'layout');
     redirect('/feed');
 };
 
 
 export async function togglePostLikeStatus(postId) {
   updatePostLikeStatus(postId, 2);
-  revalidatePath('/feed', 'layout');
+  revalidatePath('/', 'layout');
 }
