@@ -5,13 +5,20 @@ import { togglePostLikeStatus } from '@/actions/posts';
 import { useOptimistic } from 'react';
 import Image from 'next/image';
 
+function ImageLoader( config ) {
+  const urlStart = config.src.split('upload/')[0];
+  const urlEnd = config.src.split('upload/')[1];
+  const transformedUrl = `upload/w_200,q_${config.quality}`;
+  return `${urlStart}upload/${transformedUrl}${urlEnd}`;
+}
+
 function Post({ post, action }) {
 
   return (
     <article className="post">
       {post.image && (
         <div className="post-image">
-          <Image src={post.image} fill alt={post.title} />
+          <Image loader={ImageLoader} src={post.image}  width={200} height={120} alt={post.title} quality={50} />
         </div>
       )}
       <div className="post-content">
