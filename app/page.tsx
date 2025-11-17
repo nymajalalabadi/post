@@ -1,7 +1,12 @@
 import { Suspense } from 'react';
-
 import Posts from '@/component/posts';
 import { getPosts } from '@/lib/posts';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Latest Posts - NextPost',
+  description: 'View the latest posts from all users',
+};
 
 async function LatestPosts() {
   const latestPosts = await getPosts(2);
